@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register | Red Hope</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #FF6B6B, #C0392B);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f7f6;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    /* Animated Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.6;
+      animation: float 10s infinite alternate;
+    }
+
+    .orb1 {
+      top: -10%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 107, 107, 0.6);
+    }
+
+    .orb2 {
+      bottom: -10%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: rgba(79, 172, 254, 0.5);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      100% {
+        transform: translateY(30px) scale(1.1);
+      }
+    }
+
+    .auth-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 50px;
+      width: 100%;
+      max-width: 650px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+      animation: slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .auth-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .auth-header p {
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group.full {
+      grid-column: span 2;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #444;
+      font-size: 0.95rem;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.7);
+      outline: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+      border-color: #FF6B6B;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.1);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      grid-column: span 2;
+      background: rgba(0, 0, 0, 0.03);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      color: #444;
+    }
+
+    .checkbox-label input {
+      width: 18px;
+      height: 18px;
+      accent-color: #FF6B6B;
+    }
+
+    .btn-submit {
+      width: 100%;
+      grid-column: span 2;
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+    }
+
+    .switch-link {
+      grid-column: span 2;
+      text-align: center;
+      margin-top: 15px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .switch-link a {
+      color: #FF6B6B;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .switch-link a:hover {
+      text-decoration: underline;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      color: #555;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .back-btn:hover {
+      color: #FF6B6B;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-group.full,
+      .checkbox-group,
+      .btn-submit,
+      .switch-link {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Join Red Hope</h2>
+      <p>Create your profile and start saving lives through blood donation through blood donation</p>
+    </div>
+
+    <form action="register.php" method="POST" class="form-grid" novalidate>
+
+      <div class="input-group full">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      </div>
+
+      <div class="input-group">
+        <label for="phone_number">Phone Number</label>
+        <input type="text" id="phone_number" name="phone_number" placeholder="e.g. 1234567890" required
+          pattern="[0-9]{10,15}" title="Enter valid phone number" />
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required minlength="6" />
+      </div>
+
+      <div class="input-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" min="18" max="100" placeholder="18" required />
+      </div>
+
+      <div class="input-group">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="">--Select--</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="input-group full">
+        <label for="blood_group">Blood Group</label>
+        <select id="blood_group" name="blood_group" required>
+          <option value="">--Select your blood type--</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+      </div>
+
+      <div class="checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" name="available_for_blood" value="1" />
+          I am available for Blood Donation
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" name="available_for_organ" value="1" />
+          I am available for Organ Donation (post-mortem pledge)
+        </label>
+      </div>
+
+      <button type="submit" class="btn-submit">Create Account</button>
+
+      <div class="switch-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>
